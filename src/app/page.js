@@ -1,69 +1,181 @@
-import Image from "next/image";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
-export default function Home() {
+export const metadata = {
+  title: "DeskWise — IT Helpdesk",
+  description:
+    "DeskWise is your internal IT support portal. Submit and track helpdesk tickets easily.",
+};
+
+export default function LandingPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <Navbar />
+      <main>
+        {/* Hero */}
+        <section
+          style={{
+            background: "var(--bg-header)",
+            color: "var(--text-on-dark)",
+            padding: "72px 24px",
+            textAlign: "center",
+          }}
+        >
+          <div style={{ maxWidth: "640px", margin: "0 auto" }}>
+            <p
+              style={{
+                fontSize: "12px",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#64748b",
+                marginBottom: "12px",
+              }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Internal Tool — IT Support
+            </p>
+            <h1
+              style={{
+                fontSize: "36px",
+                fontWeight: 700,
+                lineHeight: 1.2,
+                marginBottom: "16px",
+                color: "#f8fafc",
+              }}
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+              DeskWise IT Helpdesk
+            </h1>
+            <p
+              style={{
+                fontSize: "16px",
+                color: "#94a3b8",
+                marginBottom: "32px",
+                lineHeight: 1.7,
+              }}
+            >
+              Submit support requests, track their status, and get help from the
+              IT team — all in one place.
+            </p>
+            <div
+              style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}
+            >
+              <Link href="/login" className="btn btn-primary">
+                Sign in to your account
+              </Link>
+              <Link href="/signup" className="btn btn-secondary"
+                style={{ color: "#e2e8f0", borderColor: "#475569", background: "transparent" }}
+              >
+                Create account
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Feature blurbs */}
+        <section style={{ padding: "56px 24px", maxWidth: "900px", margin: "0 auto" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: "24px",
+            }}
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            {[
+              {
+                icon: "📋",
+                title: "Submit Tickets",
+                body: "Open a support request with a title, description, and priority level. We'll route it to the right team.",
+              },
+              {
+                icon: "🔍",
+                title: "Track Status",
+                body: "Monitor the status of your open and resolved tickets from your personal dashboard.",
+              },
+              {
+                icon: "👥",
+                title: "Team Collaboration",
+                body: "IT agents can view, assign, and update tickets across all departments.",
+              },
+            ].map((f) => (
+              <div key={f.title} className="card">
+                <div style={{ fontSize: "24px", marginBottom: "10px" }}>{f.icon}</div>
+                <h2
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: 600,
+                    marginBottom: "6px",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  {f.title}
+                </h2>
+                <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.6 }}>
+                  {f.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CTF section */}
+        <section
+          style={{
+            borderTop: "1px solid var(--border)",
+            background: "var(--bg-surface)",
+            padding: "48px 24px",
+          }}
+        >
+          <div style={{ maxWidth: "640px", margin: "0 auto", textAlign: "center" }}>
+            <h2
+              style={{
+                fontSize: "18px",
+                fontWeight: 700,
+                marginBottom: "10px",
+                color: "var(--text-primary)",
+              }}
+            >
+              About this exercise
+            </h2>
+            <p
+              style={{
+                fontSize: "14px",
+                color: "var(--text-secondary)",
+                lineHeight: 1.7,
+                marginBottom: "24px",
+              }}
+            >
+              DeskWise is a deliberately vulnerable application for learning the{" "}
+              <strong>OWASP Top 10:2025</strong>. Use normal helpdesk features,
+              explore the API, and capture flags hidden across the ten vulnerability
+              categories.
+            </p>
+            <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+              <Link href="/flags" className="btn btn-primary btn-sm">
+                Submit a flag
+              </Link>
+              <Link href="/progress" className="btn btn-secondary btn-sm">
+                View progress
+              </Link>
+              <Link href="/rules" className="btn btn-secondary btn-sm">
+                Rules
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer
+          style={{
+            borderTop: "1px solid var(--border)",
+            padding: "20px 24px",
+            textAlign: "center",
+            fontSize: "12px",
+            color: "var(--text-muted)",
+          }}
+        >
+          DeskWise IT Helpdesk — Internal use only
+        </footer>
       </main>
-    </div>
+    </>
   );
 }
