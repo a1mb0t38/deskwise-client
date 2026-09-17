@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DeskWise — Frontend Client 🖥️
 
-## Getting Started
+**DeskWise** is a modern IT Helpdesk web application built as an educational CTF (Capture The Flag) platform to teach the **OWASP Top 10:2025** security vulnerabilities. The frontend interface provides a clean, responsive user experience for helpdesk operations while giving players intuitive tools to test and exploit backend vulnerabilities, submit flags, and track their progress.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- **Authentication & User Profiles**: Complete onboarding flow, role-based views (User, Agent, Admin), and session management via Better Auth.
+- **Helpdesk Ticket Management**:
+  - View personal or department-wide tickets
+  - Create new support tickets with title, description, and priority level
+  - Update status, priority, and assignment (Staff/Admin)
+- **CTF Dashboard & Progress Tracker**:
+  - **Flag Submission**: Dedicated `/flags` interface to submit discovered `CATEGORY{...}` flags.
+  - **Progress Tracking**: Real-time progress bar showing percentage of OWASP challenges completed.
+- **Admin Panel**: Management view for user roles, privilege escalation testing, and audit log inspection.
+- **Rules & CTF Sitemap**: Interactive `/rules` page explaining challenge categories, rules of engagement, and hints.
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Styling**: Modern CSS / Utility Components
+- **Authentication**: Better Auth Client Integration (`credentials: "include"`)
+- **API Communication**: Native `fetch` wrapper targeting Express 5 backend
+
+---
+
+## 📁 Directory Structure
+
+```text
+deskwise-client/
+├── src/
+│   ├── app/
+│   │   ├── admin/             # Admin panel & role management
+│   │   ├── dashboard/         # Helpdesk main ticket dashboard
+│   │   ├── flags/             # Flag submission & progress tracker
+│   │   ├── login/             # User authentication (Login)
+│   │   ├── profile/complete/  # Profile completion & role setup
+│   │   ├── progress/          # Solved challenge statistics
+│   │   ├── rules/             # CTF rules and OWASP documentation
+│   │   ├── signup/            # Account registration
+│   │   └── tickets/           # Ticket creation and detailed view
+│   ├── components/            # Reusable UI components (Navbar, TicketTable, Badges)
+│   └── lib/                   # API helpers (`api.js`, `api-server.js`)
+├── public/                    # Static assets
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ⚙️ Prerequisites & Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Requirements
+- Node.js (v18+)
+- Running DeskWise Server instance (`http://localhost:5000`)
 
-## Learn More
+### 2. Environment Configuration
+Create a `.env.local` file in the root of `deskwise-client`:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Installation
+```bash
+npm install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Running the Development Server
+```bash
+npm run dev
+```
 
-## Deploy on Vercel
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎯 Target Pages & Vulnerability Interfaces
+
+| Route | Purpose | OWASP Category Target |
+|---|---|---|
+| `/login` | Account authentication | A07 (Auth Failures / Brute Force) |
+| `/profile/complete` | Onboarding profile setup | A01 (Mass Assignment / Role Escalation) |
+| `/tickets/new` | Support ticket creation | Helpdesk domain operation |
+| `/tickets/[id]` | Detailed ticket view | A01 (BOLA / IDOR) & A10 (Fail-Open Exception) |
+| `/admin` | Admin dashboard | A01 (BFLA Header Trust) & A09 (Audit Log Blindspot) |
+| `/flags` | Flag submission & progress | CTF Scoring System |
+
+---
+
+## 📜 License
+
+Educational Security Training Tool — for authorized educational and laboratory use only.
